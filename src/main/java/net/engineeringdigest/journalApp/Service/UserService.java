@@ -4,15 +4,25 @@ import net.engineeringdigest.journalApp.Entity.User;
 import net.engineeringdigest.journalApp.Repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
-     @Autowired
-     UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
+
+    public static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void saveNewUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getUserName()));
+        user.setRoles(Arrays.asList("READ"));
+        userRepository.save(user);
+    }
 
     public void saveEntries(User user) {
         userRepository.save(user);

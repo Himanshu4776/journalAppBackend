@@ -29,4 +29,7 @@ public class User {
 
     @DBRef
     List<JournalEntry> journals = new ArrayList<>();
+
+    // to give access authorizations -> Add/edit/delete/read etc.
+    List<String> roles;
 }
