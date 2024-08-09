@@ -96,7 +96,7 @@ public class JournalEntryController {
                 old.setTitle(myentry.getTitle() != null && !myentry.getTitle().isEmpty() ? myentry.getTitle() : old.getTitle());
                 old.setContent(myentry.getContent() != null && !myentry.getContent().isEmpty() ? myentry.getContent() : old.getContent());
 
-                journalEntryService.saveEntries(old, userName);
+                journalEntryService.saveEntries(old);
                 return new ResponseEntity<>(old, HttpStatus.OK);
             }
         }
